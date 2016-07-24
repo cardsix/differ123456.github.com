@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        	.box{
+        		position: absolute;
+        		left: 100px;
+        		top:100px;
+        		width:100px;
+        		height:100px;
+        		background-color:#CCC;
+        	}
+        	.shadow1{
+        		/*正常偏移阴影*/
+        		box-shadow:10px 10px 5px #000;
+        	}
+        	.shadow2{
+        		/*内阴影inset*/
+        		box-shadow: inset 10px 10px 10px #FFF,inset -10px -10px 10px #FFF;
+        	}
+        	.shadow3{
+        		/*负值 四方向*/
+        		box-shadow:0px 2px 5px red,2px 0px 5px green,0px -2px 5px orange,-2px 0px 5px blue;
+        	}
+        	.shadow4{
+        		/*范围*/
+        		box-shadow:10px 10px 5px 10px red,20px 20px 10px 20px #000;
+        	}
+        	.shadow5{
+        		/*多个*/
+        		box-shadow:10px 10px 5px red,20px 20px 5px #000,30px 30px 5px green,40px 40px 5px blue,50px 50px 5px orange,60px 60px 5px pink;
+        	}
+        </style>
+    </head>
+    <body>
+    	<div class="box shadow5"></div>
+    	<input type="button" value="阴影">
+    	<input type="button" value="内阴影">
+    	<input type="button" value="四边阴影">
+    	<input type="button" value="范围阴影">
+    	<input type="button" value="多个阴影">
+    	<script>
+    		var oDiv = document.querySelector('div');
+    		var aBtn = document.querySelectorAll('input');
+    		function changeShadow(className){
+    			oDiv.classList.remove('shadow1','shadow2','shadow3','shadow4','shadow5');
+    			//说明classList.remove可以移除多个
+    			oDiv.classList.add(className);
+    		}
+    		aBtn[0].onclick = function(){
+    			changeShadow('shadow1');
+    		};
+    		aBtn[1].onclick = function(){
+    			changeShadow('shadow2');
+    		};
+    		aBtn[2].onclick = function(){
+    			changeShadow('shadow3');
+    		};
+    		aBtn[3].onclick = function(){
+    			changeShadow('shadow4');
+    		};
+    		aBtn[4].onclick = function(){
+    			changeShadow('shadow5');
+    		};
+    	</script>
+    </body>
+</html>
