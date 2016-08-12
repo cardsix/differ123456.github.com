@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        	*{
+        		margin: 0;
+        		padding:0;
+        	}
+        	ul,li{
+        		list-style:none;
+        	}
+            body{
+                background-color: #000;
+            }
+            #ul1{
+                margin: 0 auto;
+                width: 646px;
+                height: 646px;
+                padding: 5px;
+                overflow: hidden;
+            }
+        	#ul1 li{
+                position: relative;
+                margin: 5px;
+        		float: left;
+        		width: 200px;
+        		height: 200px;
+        		background-color: rgb(0,0,0);
+                border: 1px solid #FFF;
+                overflow: hidden;
+        	}
+        	#ul1 li span{
+        		position:absolute;
+        		left:-200px;
+        		top:0px;
+        		width: 200px;
+        		height: 200px;
+        		background-color: red;
+        		opacity:0.5;
+        	}
+        </style>
+    </head>
+    <body>
+    	<ul id="ul1">
+    		<li>
+    			<span></span>
+    		</li>
+            <li>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+            </li>
+            <li>
+                <span></span>
+            </li>
+    	</ul>
+    	<script src="move.js"></script>
+    	<script>
+    		;(function(){
+    			'use strict';
+                function rnd(m,n){
+                    return parseInt(m + Math.random()*(n-m));
+                }
+
+                function rColor(obj){
+                    obj.style.backgroundColor = 'rgb('+rnd(1,256)+','+rnd(1,256)+','+rnd(1,256)+')';
+                }
+
+    			function a2d(n){
+    				return n*180/Math.PI;
+    			}
+
+                function hoverDir(obj,ev){
+                    //算鼠标进入oLi的角度，把它看做一个圆
+                    //看穿墙术图解
+                    var x = obj.offsetLeft + obj.offsetWidth/2 - ev.clientX;
+                    var y = obj.offsetTop + obj.offsetHeight/2 - ev.clientY;
+                    var dir = Math.atan2(y,x); //计算的是弧度，需要角度
+                    dir = a2d(dir); //转角度
+                    //因为有负数，负数范围在-0到-180 所以需要在 +180 去掉负数
+                    dir = dir + 180;
+                    // //因为有小数，所以Math.round 去小数
+                    // dir = Math.round(dir);
+                    // //因为 0 - 360 范围 数值太大 不好做判断，所以除以90 控制在小于四的数上
+                    // dir = dir/90; //这个操作会有小数出现，所以需要把除以90 和 Math.round 交换顺序
+                    dir = dir/90;
+                    dir = Math.round(dir);
+                    //圆闭合的时候 0度和360度重叠，在右面进入会出现 0 和 4 两种结果没办法做判断
+                    dir = dir%4; //取模处理 %4 让0和4的结果都是0 这样就可以判断了
+                    return dir;
+                }
+
+    			window.onload = function(){
+    				var oUl = document.getElementById('ul1');
+    				var aLi = oUl.children;
+                    var aSpan = oUl.getElementsByTagName('span');
+
+                    for(var i=0; i<aLi.length; i++){
+                        (function(index){
+                            aLi[i].onmouseover = function(ev){
+                                var oEvent = ev || event;
+                                var oFrom = oEvent.fromElement || oEvent.relatedTarget;
+                                if(aLi[index].contains(oFrom)){
+                                    return;
+                                }
+
+                                rColor(aSpan[index]);
+
+                                //调用hoverDir 获取角度
+                                var dir = hoverDir(aLi[index],oEvent);
+
+                                //记录方向和数字的对应
+                                //左 2 上 3 右  0 下 1
+
+                                //span根据方向做位置调整，然后进行move操作
+                                switch(dir){
+                                    case 0:
+                                        aSpan[index].style.left = '200px';
+                                        aSpan[index].style.top = '0px';
+                                        break;
+                                    case 1:
+                                        aSpan[index].style.left = '0px';
+                                        aSpan[index].style.top = '200px';
+                                        break;
+                                    case 2:
+                                        aSpan[index].style.left = '-200px';
+                                        aSpan[index].style.top = '0px';
+                                        break;
+                                    case 3:
+                                        aSpan[index].style.left = '0px';
+                                        aSpan[index].style.top = '-200px';
+                                        break;
+                                }
+                                //根据进入的角度，定好span的位置之后，运动，（因为每次都是运动到 top：0 left：0的位置，所以直接写一个move就好了）
+                                move(aSpan[index],{top:0,left:0});
+                            };
+
+                            aLi[i].onmouseout = function(ev){
+                                var oEvent = ev || event;
+                                var oTo = oEvent.toElement || oEvent.relatedTarget;
+                                if(aLi[index].contains(oTo)){
+                                    return;
+                                }
+
+                                rColor(aSpan[index]);
+
+                                var dir = hoverDir(aLi[index],oEvent);
+                                
+                                // aSpan[index].style.opacity = 0;
+                                // aLi[index].innerHTML = dir;
+                                //左边 2 右边 0 上边 3 下边 1
+
+                                switch(dir){
+                                    case 0:
+                                        move(aSpan[index],{left:200,top:0});
+                                        break;
+                                    case 1:
+                                        move(aSpan[index],{left:0,top:200});
+                                        break;
+                                    case 2:
+                                        move(aSpan[index],{left:-200,top:0});
+                                        break;
+                                    case 3:
+                                        move(aSpan[index],{left:0,top:-200});
+                                        break;
+                                }
+
+                            };
+                        })(i);
+                    }	
+    			};
+    		})();
+    	</script>
+    </body>
+</html>

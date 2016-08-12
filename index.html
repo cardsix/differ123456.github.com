@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <title>personal web</title>
         <style>
         	*{
         		margin:0;
@@ -13,6 +14,30 @@
         	a{
         		text-decoration: none;
         	}
+
+
+			/*自定义font-face字体*/
+				@font-face {font-family: 'iconfont';
+				    src: url('iconfont.eot'); /* IE9*/
+				    src: url('iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+				    url('iconfont.woff') format('woff'), /* chrome、firefox */
+				    url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+				    url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+				}
+				.iconfont{
+				    font-family:"iconfont" !important;
+				    font-size:60px;font-style:normal;
+				    -webkit-font-smoothing: antialiased;
+				    -webkit-text-stroke-width: 0.2px;
+				    -moz-osx-font-smoothing: grayscale;
+				    color:#515151;
+				    transition:0.3s all ease;
+				}
+				.iconfont:hover{
+					font-size:100px;
+				}
+			/*end自定义font-face字体*/
+
         	.main{
         		width:100%;
         		overflow:hidden;
@@ -142,40 +167,231 @@
         		transition:0.3s all ease;
         	}
 
-			.nav{
+			/*---吸顶条导航---*/
+				.nav{
+					position: relative;
+					top:0;
+					left: 0;
+					width: 100%;
+					height: 60px;
+					display:-webkit-box;
+					background: rgb(27,188,155); 
+					z-index: 999;
+				}
+				.nav li{
+					position: relative;
+					-webkit-box-flex:1;
+					text-align: center;
+					font-size:30px;
+					line-height: 60px;
+					z-index: 2;
+					font-family: 'Open Sans', sans-serif;
+					font-weight: bold;
+					color:#F1F1F1;
+					cursor: pointer;
+				}
+				.nav #block{
+					position: absolute;
+					left: 0;
+					top: 0;
+					background: rgba(0,0,0,0.5);
+					z-index: 1;
+					transition:0.4s all ease;
+				}
+				.nav_zw{
+					width: 100%;
+					height: 60px;
+					display: none;
+				}
+			/*---end吸顶条导航---*/
+
+			/*---作品区域---*/
+				.Portfolio{
+					position: relative;
+					width: 100%;
+					background: rgb(219,219,219);
+				}
+				.slide_effect{
+					width: 50%;
+					left:50%;
+					margin-left: -25%;
+					top:30px;
+					height: 60px; 
+					position:absolute;
+				}
+				.slide_effect span{
+					position: absolute;
+					left:0;
+					top:0;
+					width:100%;
+					height:100%;
+					text-align: center;
+					font-size: 50px;
+					line-height: 60px;
+					font-weight:bold; 
+					font-family:"微软雅黑";
+					color:rgba(0,0,0,0.8);
+				}
+				@keyframes test{
+					from{background-position:0px 0px;}
+					to{background-position:600px 0px;}
+				}
+				.slide_effect .s2{
+					background:-webkit-linear-gradient(-45deg, rgba(0,0,0,0) 60px,#fff 80px,rgba(0,0,0,0.4) 100px); 
+					-webkit-background-clip:text; 
+					color:rgba(0,0,0,0);
+					-webkit-animation:test 2s linear infinite;
+				}
+				.Portfolio .works{
+					position: absolute;
+					left:50%;
+					margin-left: -40%;
+					top:120px;
+					width:80%;
+					height: 70%;
+					display: -webkit-box;
+					-webkit-box-orient:vertical;
+				}
+				.Portfolio .works ul{
+					display: -webkit-box;
+					-webkit-box-flex:1;
+				}
+				.Portfolio .works ul li{
+					-webkit-box-flex:1;
+					/*border-radius:20px;*/
+					background:#f88;
+					margin: 2px;
+					position: relative;
+				}
+				.Portfolio .works .row1 li:nth-child(1){
+					background: url(images/html_css.jpg) no-repeat;
+					background-size: 100%;
+				}
+				.Portfolio .works .row1 li:nth-child(2){
+					background: url(images/js.jpg) no-repeat;
+					background-size: 100%;
+				}
+				.Portfolio .works .row1 li:nth-child(3){
+					background: url(images/jl.jpg) no-repeat;
+					background-size: 100% 180%;
+				}
+				.Portfolio .works .row2 li:nth-child(1){
+					background: url(images/html5.jpg) center center no-repeat;
+					background-size: 140% 140%;
+				}
+				.Portfolio .works .row2 li:nth-child(2){
+					background: url(images/css3.jpg) no-repeat;
+					background-size: 100% 100%;
+				}
+				.Portfolio .works .row2 li:nth-child(3){
+					background: url(images/mobile.jpg) no-repeat;
+					background-size: 100%;
+				}
+				.Portfolio .works ul li .rgba_cover{
+					/*border-radius:20px;*/
+					position: absolute;
+					left: 0px;
+					top: 0px;
+					background: rgba(0,0,0,0.4);
+					-webkit-transition:.3s all ease;
+					-webkit-transform-origin:center center;
+					-webkit-transform:scale(0.5,0.5);
+					opacity: 0;
+					text-align: center;
+					font-size: 40px;
+					color:#FFF;
+					font-weight: bold;
+				}
+				.Portfolio .works ul li:hover .rgba_cover{
+					-webkit-transform:scale(1,1);
+					opacity: 1;
+				}
+			/*---end作品区域---*/
+
+			/*---整屏遮罩层带iframe---*/
+				.whole_cover{
+					position: fixed;
+					left: 0;
+					bottom:0;
+					width: 100%;
+					height: 100%;
+					background: rgba(0,0,0,0.5);
+					z-index: 1000;
+					opacity: 0;
+					display: none;
+					transition: 1s all ease;
+				}
+				.whole_cover iframe{
+					display: block;
+					position: absolute;
+					left:50%;
+					top:50%;
+					margin-left: -40%;
+					width: 80%;
+					height: 80%;
+				}
+				.whole_cover .cover_close{
+					position: absolute;
+				}
+			/*---end整屏遮罩层带iframe---*/
+
+			#skills{
 				position: relative;
-				top:0;
-				left: 0;
 				width: 100%;
-				height: 60px;
-				display:-webkit-box;
-				background: rgb(27,188,155); 
+				background: #4c4c4c;
 			}
-			.nav li{
-				position: relative;
-				-webkit-box-flex:1;
-				text-align: center;
-				font-size:30px;
-				line-height: 60px;
-				z-index: 2;
-				font-family: 'Open Sans', sans-serif;
-				font-weight: bold;
-				color:#F1F1F1;
-				cursor: pointer;
+			#skills .slide_effect span{
+				color: rgba(255,255,255,0.8);
 			}
-			.nav #block{
+			#skills .slide_effect .s2{
+				background:-webkit-linear-gradient(-45deg, rgba(255,255,255,0) 60px,#000 80px,rgba(255,255,255,0.4) 100px); 
+				-webkit-background-clip:text; 
+				color:rgba(0,0,0,0);
+				-webkit-animation:test 2s linear infinite;
+			}
+
+			#skills .con{
 				position: absolute;
-				left: 0;
-				top: 0;
-				background: rgba(0,0,0,0.5);
-				z-index: 1;
-				transition:0.4s all ease;
+				left:50%;
+				margin-left: -40%;
+				top:120px;
+				width:80%;
+				height: 70%;
 			}
-			.test{
+			#skills .con ul{
 				width: 100%;
-				height: 3000px;
-				background: #CCC;
+				height: 100%;
 			}
+			#skills .con ul li{
+				float: left;
+				width: 32%;
+				height: 32%;
+				background:#f88;
+				margin: 2px;
+				position: relative;
+			}
+
+			/*联系我*/
+				#contact_me{
+					position: relative;
+					width: 100%;
+					height: 240px;
+					background: rgb(27,188,155);
+				}
+				#contact_me .contact_icon{
+					position: absolute;
+					left: 0;
+					top:120px;
+					width: 100%;
+					line-height: 100px;
+					display: -webkit-box;
+				}
+				#contact_me .contact_icon li{
+					height: 120px;
+					-webkit-box-flex:1;
+					text-align: center;
+				}
+			/*end联系我*/
         </style>
     </head>
     <body>
@@ -204,12 +420,80 @@
 				<li>Banner</li>
 				<li>Portfolio</li>
 				<li>Skills</li>
-				<li>About Me</li>
+				<li>Contact Me</li>
 				<div id="block"></div>
     		</ul>
-    		<div class="test"></div>
+    		<div class="nav_zw"></div>
+    		<div id="Portfolio" class="Portfolio">
+    			<h3 class="slide_effect">
+    				<span>Portfolio</span>
+    				<span class="s2">Portfolio</span>
+    			</h3>
+				<div class="works">
+					<ul class="row1">
+						<li>
+							<a href="javascript:;" class="rgba_cover" id="html_example">HTML/CSS</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="rgba_cover" id="js_example">Javascript</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="rgba_cover" id="resume">我的简历</a>
+						</li>
+					</ul>
+					<ul class="row2">
+						<li>
+							<a href="javascript:;" class="rgba_cover" id="H5_example">HTML5</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="rgba_cover" id="CSS3_example">CSS3</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="rgba_cover" id="mobile">移动端</a>
+						</li>
+					</ul>
+				</div>
+    		</div>
+
+    		<!--模块整屏遮罩-->
+			<div class="whole_cover">
+				<iframe src="pages/cross_color.html" frameborder="0"></iframe>
+				<div class="cover_close"></div>
+			</div>
+			<div id="skills">
+				<h3 class="slide_effect" id="btn">
+    				<span>Skills</span>
+    				<span class="s2">Skills</span>
+    			</h3>
+				<div class="con">
+					<ul>
+						<li>1</li>
+				    	<li>2</li>
+				    	<li>3</li>
+						<li>4</li>
+				    	<li>5</li>
+				    	<li>6</li>
+						<li>7</li>
+				    	<li>8</li>
+				    	<li>9</li>
+					</ul>
+			    </div>
+			</div>
+			<div id="contact_me">
+				<h3 class="slide_effect">
+    				<span>Contact Me</span>
+    				<span class="s2">Contact Me</span>
+    			</h3>
+    			<ul class="contact_icon">
+    				<li><a href="javascript:;" class="iconfont">&#xe60a;</a></li>
+    				<li><a href="javascript:;" class="iconfont">&#xe636;</a></li>
+    				<li><a href="javascript:;" class="iconfont">&#xe603;</a></li>
+    				<li><a href="javascript:;" class="iconfont">&#xe618;</a></li>
+    			</ul>
+			</div>
     	</div>
     	<script src="js/jquery-1.7.2.js"></script>
+    	<script src="js/move.js"></script>
     	<script>
     		function rnd(m,n){
     			return Math.floor(m+Math.random()*(n-m));
@@ -231,6 +515,9 @@
     			$(window).resize(function(){
     				$('#main_banner').css({height:$(window).height()});
     			});
+
+    			//将Portfolio部分设定为整屏减去nav的高度，marginTop为nav高度
+    			$('#Portfolio').css({height:($(window).height()-60)+'px'});
 
     			//添加动画效果的选项卡
     			$bannerCon = $('.banner_con');
@@ -335,12 +622,14 @@
     			$(window).scroll(function(){
     				if($(window).scrollTop() >= navT){
 	    				$('.nav').css({position:'fixed'});
+	    				$('.nav_zw').show();
 	    			}else{
 	    				$('.nav').css({position:'relative'});
+	    				$('.nav_zw').hide();
 	    			}
     			});
 
-    			//弹性菜单
+    			//hover菜单
     			$navLinks = $('.nav li');
     			$('#block').css({width:$navLinks.eq(0).outerWidth(),height:$navLinks.eq(0).outerHeight()});
 				for(var i=0;i<$navLinks.length;i++){
@@ -356,6 +645,82 @@
 					})(i);
 				}
 
+
+				//给技术模块的半透明遮罩层加宽高
+				$('.rgba_cover').css({width:$('.rgba_cover').parent().outerWidth()+'px',height:$('.rgba_cover').parent().outerHeight()+'px',lineHeight:$('.rgba_cover').parent().outerHeight()+'px'});
+
+				//给整屏内的iframe加top
+				$('.whole_cover iframe').css({marginTop:-$('.whole_cover iframe').outerHeight()*0.5+'px'});
+
+				//给每一个技术模块分别添加弹出整屏遮罩层（带iframe，iframe内是作品展示页）
+				$htmlEmp = $('#html_example');
+				$htmlEmp.click(function(){
+					$('.whole_cover').show();
+					//给整屏内的iframe加top
+					$('.whole_cover iframe').css({marginTop:-$('.whole_cover iframe').outerHeight()*0.5+'px'});
+					$('.whole_cover').css({opacity:1});
+				});
+
+				//页面加载给#skill整屏高度
+				$skill = $('#skills');
+				$skill.css({height:$(window).height()+'px'});
+
+
+				/*收起展开效果*/
+					var oBtn = document.getElementById('btn');
+					var oUl = $skill.find('.con')[0];
+					var aLi = oUl.getElementsByTagName('li');
+					var oldW = aLi[0].offsetWidth;	
+					var oldH = aLi[0].offsetHeight;	
+					//float ->absolute
+					var aPos = [];
+					for(var i = 0;i<aLi.length;i++){
+						aPos.push({left:aLi[i].offsetLeft,top:aLi[i].offsetTop});
+					}
+					
+					//不能偷懒 必须循环两次
+					for(var i = 0;i<aLi.length;i++){
+						aLi[i].style.position = 'absolute';
+						aLi[i].style.left = aPos[i].left+'px';
+						aLi[i].style.top = aPos[i].top+'px';
+						aLi[i].style.margin = 0;
+					}
+					var bOk = false;
+					oBtn.onclick = function(){
+						if(bOk){return;}
+						bOk = true;
+						for(var i = 0;i<aLi.length;i++){
+							(function(index){
+								setTimeout(function(){
+									move(aLi[index],{left:0,top:0,width:0,height:0,opacity:0},{complete:function(){
+										//判断是不是最后一个收完了
+										if(index == aLi.length-1){
+											//你放
+											for(var i = aLi.length-1;i>=0;i--){
+												(function(index){
+													setTimeout(function(){
+														move(aLi[index],{left:aPos[index].left,top:aPos[index].top,width:oldW,height:oldH,opacity:1},{
+							complete:function(){
+								if(index == 0){
+									bOk =false;
+								}	
+							}								
+															
+						});
+														
+													},(aLi.length-1-i)*100);
+													
+												})(i);
+												
+											}
+											
+										}	
+									}});
+								},i*100);
+							})(i);
+						}
+					};
+				/*end收起展开效果*/
     		});
     	</script>
     </body>
