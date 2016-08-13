@@ -344,6 +344,7 @@
 					margin-left: -40%;
 					width: 80%;
 					height: 80%;
+					border-radius: 20px;
 				}
 				.whole_cover .cover_close{
 					position: absolute;
@@ -583,9 +584,13 @@
 					}
 				}
 
+				var bookOk = false;
+				var blastOk = false;
 
                 //添加翻书效果
 				$bannerCtlBtns.eq(0).click(function(){
+					if(bookOk)return;
+					bookOk = true;
 					$('.banner_con .con').css({opacity:0});
 					//控制z-index
 					$blast.css({zIndex:1});
@@ -601,11 +606,12 @@
 					$bookPage1.css({WebkitTransform:'perspective(800px) rotateY(-180deg)'});
 					//瞬间回去
 					function tranEnd(){
+						bookOk = false;
 						$('.banner_con .con').css({opacity:0.6});
 						$bookPage1.off('transitionend',tranEnd);
 						$bookPage1.css({WebkitTransition:'none'});
 						$bookPage1.css({WebkitTransform:'perspective(800px) rotateY(0deg)'});
-						$bookBg.hide();
+						// $bookBg.hide();
 						$blast.css({zIndex:2});
 						$bookBg.css({zIndex:1});
 						blastInit();
@@ -615,6 +621,8 @@
 
 				//添加爆炸效果
 				$bannerCtlBtns.eq(1).click(function(){
+					if(blastOk)return;
+					blastOk = true;
 					$('.banner_con .con').css({opacity:0});
 					//控制z-index
 					$blast.css({zIndex:2});
@@ -632,11 +640,12 @@
 
 
 						function tranEnd(){
+							blastOk = false;
 							$('.banner_con .con').css({opacity:0.6});
 							$aS.eq($aS.length-1).off('transitionend',tranEnd);
 							$blast.css({zIndex:1});
 							$bookBg.css({zIndex:2});
-							$blast.hide();
+							// $blast.hide();
 						}
 						$aS.eq($aS.length-1).on('transitionend',tranEnd);
 					}
