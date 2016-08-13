@@ -69,6 +69,21 @@
 				height:100%;
         	}
 
+			.banner_con .con{
+				position: absolute;
+				top: 30%;
+				left: 50%;
+				margin-left: -40%;
+				width: 80%;
+				font-size: 50px;
+				text-align: center;
+				color: #F1F1F1;
+				z-index:10;
+				opacity: 0;
+				font-weight: bold;
+				font-family: "微软雅黑";
+				transition:0.4s all ease;
+			}
         	/*--翻书效果--*/
 	        	.banner .banner_con .book_bg{
 	        		position:absolute;
@@ -265,11 +280,11 @@
 				}
 				.Portfolio .works .row1 li:nth-child(1){
 					background: url(images/html_css.jpg) no-repeat;
-					background-size: 100%;
+					background-size: 100% 100%;
 				}
 				.Portfolio .works .row1 li:nth-child(2){
 					background: url(images/js.jpg) no-repeat;
-					background-size: 100%;
+					background-size: 100% 130%;
 				}
 				.Portfolio .works .row1 li:nth-child(3){
 					background: url(images/jl.jpg) no-repeat;
@@ -285,7 +300,7 @@
 				}
 				.Portfolio .works .row2 li:nth-child(3){
 					background: url(images/mobile.jpg) no-repeat;
-					background-size: 100%;
+					background-size: 100% 100%;
 				}
 				.Portfolio .works ul li .rgba_cover{
 					/*border-radius:20px;*/
@@ -315,7 +330,7 @@
 					bottom:0;
 					width: 100%;
 					height: 100%;
-					background: rgba(0,0,0,0.5);
+					background: rgba(0,0,0,0.6);
 					z-index: 1000;
 					opacity: 0;
 					display: none;
@@ -332,6 +347,13 @@
 				}
 				.whole_cover .cover_close{
 					position: absolute;
+					right: 10px;
+					top:10px;
+					width: 40px;
+					height: 40px;
+					background: url(images/close.png) no-repeat;
+					background-size:100% 100%;
+					cursor:pointer;
 				}
 			/*---end整屏遮罩层带iframe---*/
 
@@ -369,6 +391,11 @@
 				background:#f88;
 				margin: 2px;
 				position: relative;
+				font-size: 30px;
+				text-align: center;
+				color: #F1F1F1;
+				font-family: "微软雅黑";
+				font-weight: bold;
 			}
 
 			/*联系我*/
@@ -398,17 +425,17 @@
     	<div class="main">
     		<div id="main_banner" class="banner">
     			<div class="banner_con">
-    				<div class="flip">
-    					
-    				</div>
     				<div class="book_bg">
                         <div class="page1">
                             <div class="front"></div>
                             <div class="back"></div>
                         </div>
                         <div class="page2"></div>
+                        <p class="con">Please click on the following first navigation blocks to switch to page second</p>
                     </div>
-                    <div class="blast"></div>  
+                    <div class="blast">
+                    	<p class="con">Ha-ha！ You were cheated by clicking on the second block turn back, or click on the bottom of the arrow to see more</p>
+                    </div>  
     			</div>
     			<ul class="banner_ctl">
     				<li><a></a></li>
@@ -458,7 +485,7 @@
     		<!--模块整屏遮罩-->
 			<div class="whole_cover">
 				<iframe src="pages/cross_color.html" frameborder="0"></iframe>
-				<div class="cover_close"></div>
+				<a herf="javascript:;" class="cover_close"></a>
 			</div>
 			<div id="skills">
 				<h3 class="slide_effect" id="btn">
@@ -467,15 +494,15 @@
     			</h3>
 				<div class="con">
 					<ul>
-						<li>1</li>
-				    	<li>2</li>
-				    	<li>3</li>
-						<li>4</li>
-				    	<li>5</li>
-				    	<li>6</li>
-						<li>7</li>
-				    	<li>8</li>
-				    	<li>9</li>
+						<li>HTML/CSS</li>
+				    	<li>请点击Skills查看</li>
+				    	<li>Javascript</li>
+						<li>Jquery</li>
+				    	<li>HTML5</li>
+				    	<li>CSS3</li>
+						<li>AngularJS</li>
+				    	<li>git版本控制</li>
+				    	<li>Grunt/Gulp</li>
 					</ul>
 			    </div>
 			</div>
@@ -509,6 +536,9 @@
 						$(window).scrollTop(0);
 					}
 				}
+
+				//页面加载显示Banner上的文字
+				$('.banner_con .con').css({opacity:0.6});
 
     			//将主Banner设置为整屏高度
     			$('#main_banner').css({height:$(window).height()});
@@ -556,6 +586,7 @@
 
                 //添加翻书效果
 				$bannerCtlBtns.eq(0).click(function(){
+					$('.banner_con .con').css({opacity:0});
 					//控制z-index
 					$blast.css({zIndex:1});
 					$bookBg.css({zIndex:2});
@@ -570,6 +601,7 @@
 					$bookPage1.css({WebkitTransform:'perspective(800px) rotateY(-180deg)'});
 					//瞬间回去
 					function tranEnd(){
+						$('.banner_con .con').css({opacity:0.6});
 						$bookPage1.off('transitionend',tranEnd);
 						$bookPage1.css({WebkitTransition:'none'});
 						$bookPage1.css({WebkitTransform:'perspective(800px) rotateY(0deg)'});
@@ -583,6 +615,7 @@
 
 				//添加爆炸效果
 				$bannerCtlBtns.eq(1).click(function(){
+					$('.banner_con .con').css({opacity:0});
 					//控制z-index
 					$blast.css({zIndex:2});
 					$bookBg.css({zIndex:1});
@@ -599,6 +632,7 @@
 
 
 						function tranEnd(){
+							$('.banner_con .con').css({opacity:0.6});
 							$aS.eq($aS.length-1).off('transitionend',tranEnd);
 							$blast.css({zIndex:1});
 							$bookBg.css({zIndex:2});
@@ -629,6 +663,22 @@
 	    			}
     			});
 
+    			//给每一个导航条的li加点击事件，控制滚动距离
+    			$navLis =  $('.nav li');
+    			$('.nav').on('click','li',function(){
+    				if($(this).html() == 'Banner'){
+    					$('body,html').animate({scrollTop:0},1000,'swing');
+    				}else if($(this).html() == 'Portfolio'){
+    					$('body,html').animate({scrollTop:$('#Portfolio').offset().top-60},1000,'swing');
+    				}
+    				else if($(this).html() == 'Skills'){
+    					$('body,html').animate({scrollTop:$('#skills').offset().top-60},1000,'swing');
+    				}
+    				else if($(this).html() == 'Contact Me'){
+    					$('body,html').animate({scrollTop:$('#contact_me').offset().top-60},1000,'swing');
+    				}
+    			});
+
     			//hover菜单
     			$navLinks = $('.nav li');
     			$('#block').css({width:$navLinks.eq(0).outerWidth(),height:$navLinks.eq(0).outerHeight()});
@@ -653,12 +703,47 @@
 				$('.whole_cover iframe').css({marginTop:-$('.whole_cover iframe').outerHeight()*0.5+'px'});
 
 				//给每一个技术模块分别添加弹出整屏遮罩层（带iframe，iframe内是作品展示页）
-				$htmlEmp = $('#html_example');
-				$htmlEmp.click(function(){
-					$('.whole_cover').show();
-					//给整屏内的iframe加top
-					$('.whole_cover iframe').css({marginTop:-$('.whole_cover iframe').outerHeight()*0.5+'px'});
-					$('.whole_cover').css({opacity:1});
+				$covers = $('.rgba_cover');
+				for(var i=0; i<$covers.length; i++){
+					$covers.eq(i).click(function(){
+						$('.whole_cover').show();
+						//给整屏内的iframe加top
+						$('.whole_cover iframe').css({marginTop:-$('.whole_cover iframe').outerHeight()*0.5+'px'});
+						$('.whole_cover').css({opacity:1});
+						//判断改iframe的src
+						if($(this).attr('id') == 'html_example'){
+							$('.whole_cover iframe').attr('src','1.html');
+						}else if($(this).attr('id') == 'js_example'){
+							$('.whole_cover iframe').attr('src','2.html');
+						}else if($(this).attr('id') == 'resume'){
+							$('.whole_cover iframe').attr('src','3.html');
+						}else if($(this).attr('id') == 'H5_example'){
+							$('.whole_cover iframe').attr('src','4.html');
+						}else if($(this).attr('id') == 'CSS3_example'){
+							$('.whole_cover iframe').attr('src','5.html');
+						}else if($(this).attr('id') == 'mobile'){
+							$('.whole_cover iframe').attr('src','6.html');
+						}
+					});
+				}
+
+
+				// $htmlEmp = $('#html_example');
+				// $htmlEmp.click(function(){
+				// 	$('.whole_cover').show();
+				// 	//给整屏内的iframe加top
+				// 	$('.whole_cover iframe').css({marginTop:-$('.whole_cover iframe').outerHeight()*0.5+'px'});
+				// 	$('.whole_cover').css({opacity:1});
+				// });
+
+				//整屏遮罩层的关闭按钮
+				$('.cover_close').click(function(){
+					$('.whole_cover').css({opacity:0});
+					function tranEnd(){
+						$('.whole_cover').off('transitionend',tranEnd);
+						$('.whole_cover').hide();
+					}
+					$('.whole_cover').on('transitionend',tranEnd);
 				});
 
 				//页面加载给#skill整屏高度
@@ -672,9 +757,15 @@
 					var aLi = oUl.getElementsByTagName('li');
 					var oldW = aLi[0].offsetWidth;	
 					var oldH = aLi[0].offsetHeight;	
+
+					//给li加行高
+					$('#skills .con ul li').css({lineHeight:oldH+'px'});
+
 					//float ->absolute
 					var aPos = [];
 					for(var i = 0;i<aLi.length;i++){
+						//加随机背景色
+						aLi[i].style.backgroundColor = 'rgba('+rnd(0,254)+','+rnd(0,254)+','+rnd(0,254)+',0.5)';
 						aPos.push({left:aLi[i].offsetLeft,top:aLi[i].offsetTop});
 					}
 					
@@ -699,6 +790,8 @@
 											for(var i = aLi.length-1;i>=0;i--){
 												(function(index){
 													setTimeout(function(){
+														//加随机背景色
+						aLi[index].style.backgroundColor = 'rgba('+rnd(0,254)+','+rnd(0,254)+','+rnd(0,254)+',0.5)';
 														move(aLi[index],{left:aPos[index].left,top:aPos[index].top,width:oldW,height:oldH,opacity:1},{
 							complete:function(){
 								if(index == 0){
