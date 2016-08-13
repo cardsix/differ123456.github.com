@@ -94,6 +94,7 @@
 	                background: url(images/slide-1.jpg) no-repeat;
 	                background-size:100% 100%;
 	                z-index: 2;
+	                overflow: hidden;
 	        	}
 	            /*.banner .banner_con .book_bg:active .page1{
 	                -webkit-transform:perspective(800px) rotateY(-180deg);
@@ -150,6 +151,7 @@
 	            	-webkit-transform-style:preserve-3d;
 	            	-webkit-transform:perspective(800px) rotateX(0deg) rotateY(0deg);
 	        		z-index: 1;
+	        		overflow: hidden;
 	            }
 	            .banner .banner_con .blast span{
 	            	position: absolute;
@@ -432,10 +434,10 @@
                             <div class="back"></div>
                         </div>
                         <div class="page2"></div>
-                        <p class="con">Please click on the following first navigation blocks to switch to page second</p>
+                        <p class="con">Hello！ 欢迎来到王宇的个人网站，你可以点击下方第一个滑块翻到第二页，我为您精心准备了礼物。</p>
                     </div>
                     <div class="blast">
-                    	<p class="con">Ha-ha！ You were cheated by clicking on the second block turn back, or click on the bottom of the arrow to see more</p>
+                    	<p class="con">哈哈！ 你被我骗了，什么都没有对不对，你可以点击第二个滑块回到第一页，也可以点击下面的箭头查看我更多的一面！</p>
                     </div>  
     			</div>
     			<ul class="banner_ctl">
@@ -485,7 +487,7 @@
 
     		<!--模块整屏遮罩-->
 			<div class="whole_cover">
-				<iframe src="pages/cross_color.html" frameborder="0"></iframe>
+				<iframe src="" frameborder="0"></iframe>
 				<a herf="javascript:;" class="cover_close"></a>
 			</div>
 			<div id="skills">
@@ -721,7 +723,7 @@
 						$('.whole_cover').css({opacity:1});
 						//判断改iframe的src
 						if($(this).attr('id') == 'html_example'){
-							$('.whole_cover iframe').attr('src','1.html');
+							$('.whole_cover iframe').attr('src','pages/html_example.html');
 						}else if($(this).attr('id') == 'js_example'){
 							$('.whole_cover iframe').attr('src','2.html');
 						}else if($(this).attr('id') == 'resume'){
@@ -735,15 +737,6 @@
 						}
 					});
 				}
-
-
-				// $htmlEmp = $('#html_example');
-				// $htmlEmp.click(function(){
-				// 	$('.whole_cover').show();
-				// 	//给整屏内的iframe加top
-				// 	$('.whole_cover iframe').css({marginTop:-$('.whole_cover iframe').outerHeight()*0.5+'px'});
-				// 	$('.whole_cover').css({opacity:1});
-				// });
 
 				//整屏遮罩层的关闭按钮
 				$('.cover_close').click(function(){
