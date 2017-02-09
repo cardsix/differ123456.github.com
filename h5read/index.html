@@ -319,45 +319,18 @@
         </div>
 		<div class="main">
 		    <div class="text-area">
-		    	<h3 id="text-title" class="text-title">传闻有误</h3>
+		    	<h3 id="text_title" class="text-title"></h3>
 		    	<div id="text_con" class="text-con">
-			    	<p>
-			    		此时七皇子独孤禹已从江旭身后转出，只见他眉目疏朗，一身华服，气质高贵，黑发上束金冠，冠上镶明珠，细长眼中带着三分邪气，不笑时唇亦翘起，俊朗如春日阳光，正是姑娘们最喜欢的那种类型。
-			    	</p>
-			    	<p>
-			    		彼时场中诸女，除了心中有鬼的江若雪，江若晴江若雨以及几个丫鬟乍一见他，几乎都羞得红了脸，小心肝怦怦直跳。
-			    	</p>
-			    	<p>
-			    		然而不等江旭开口拒绝，就听七皇子已然抚掌大笑，“有美作陪，如此甚好！”说话间，已步入亭内，他像是想起了什么，突然转头看看江若雪，随口道，“你也留下来吧！”
-			    	</p>
-			    	<p>
-			    		江暖心这一开口，霎时将所有人的目光都集中到她身上，而在场众人打量她的眼神也是各不相同的。
-			    	</p>
-			    	<p>
-			    		“江暖心，适可而止！”江旭经过时，一对浓眉皱紧，望着江暖心的深沉目光中含了浓浓的警告意味。
-			    	</p>
-			    	<p>
-			    		此时七皇子独孤禹已从江旭身后转出，只见他眉目疏朗，一身华服，气质高贵，黑发上束金冠，冠上镶明珠，细长眼中带着三分邪气，不笑时唇亦翘起，俊朗如春日阳光，正是姑娘们最喜欢的那种类型。
-			    	</p>
-			    	<p>
-			    		彼时场中诸女，除了心中有鬼的江若雪，江若晴江若雨以及几个丫鬟乍一见他，几乎都羞得红了脸，小心肝怦怦直跳。
-			    	</p>
-			    	<p>
-			    		然而不等江旭开口拒绝，就听七皇子已然抚掌大笑，“有美作陪，如此甚好！”说话间，已步入亭内，他像是想起了什么，突然转头看看江若雪，随口道，“你也留下来吧！”
-			    	</p>
-			    	<p>
-			    		江暖心这一开口，霎时将所有人的目光都集中到她身上，而在场众人打量她的眼神也是各不相同的。
-			    	</p>
-			    	<p>
-			    		“江暖心，适可而止！”江旭经过时，一对浓眉皱紧，望着江暖心的深沉目光中含了浓浓的警告意味。
-			    	</p>
+			    	<!--<p>-->
+			    		<!--正是姑娘们最喜欢的那种类型。-->
+			    	<!--</p>-->
 			    </div>
 		    </div>
 		    <div class="flip-bar">
 		        <ul class="flip-bar-list">
-		            <li class="flip-item">上一章</li>
+		            <li id="prev_chapter" class="flip-item">上一章</li>
 		            <i class="flip-break-line"></i>
-		            <li class="flip-item">下一章</li>
+		            <li id="next_chapter" class="flip-item">下一章</li>
 		        </ul>
 		    </div> 
 		</div>
@@ -379,9 +352,27 @@
 					function getStorage(key){
 						return window.localStorage.getItem(prefix + key);
 					}
+					function getByJsonp(jsonpUrl){
+						var promise = new Promise(function(resolve,reject){
+							$.jsonp({
+								url:jsonpUrl,
+								cache:true, //这里如果不加缓存，jquery.jsonp.js总是会拼上一个时间戳
+								callback:'duokan_fiction_chapter',
+								success:function(data){
+									var result = decodeURIComponent(escape($.base64.decode(data)));
+									resolve(result);
+								},
+								error:function(){
+									reject();
+								}
+							});
+						});
+						return promise;
+					}
 					return {
 						setStorage:setStorage,
-						getStorage:getStorage
+						getStorage:getStorage,
+						getByJsonp:getByJsonp
 					};
 				})();
 				var doc = $(document),
@@ -390,7 +381,9 @@
 					baseFontSize:parseInt(Util.getStorage('baseFontSize')) || 14,
 					bgColorIndex:(parseInt(Util.getStorage('curBgColorIndex')) != null)?parseInt(Util.getStorage('curBgColorIndex')):1,
 					bgColor:Util.getStorage('curBgColor') || '#e9dfc7',
-					frontColor:Util.getStorage('curFrontColor') || 'rbg(0,0,0)'
+					frontColor:Util.getStorage('curFrontColor') || 'rbg(0,0,0)',
+					curChapterId:parseInt(Util.getStorage('curChapterId')) || 1,
+					totalChapterCount:parseInt(Util.getStorage('totalChapterCount'))
 				};
 				var tempDom = {
 					body:$('body'),
@@ -402,10 +395,13 @@
 					optionArea:$('#option_area'),
 					turnUpFontSize:$('#turnUp_fontSize'),
 					turnDownFontSize:$('#turnDown_fontSize'),
+					textTitle:$('#text_title'),
 					textCon:$('#text_con'),
 					colorChooseGroup:$('#color_choose_group'),
 					dayBgColor:$('#day_bgColor'),
-					nightBgColor:$('#night_bgColor')
+					nightBgColor:$('#night_bgColor'),
+					prevChapter:$('#prev_chapter'),
+					nextChapter:$('#next_chapter')
 				};
 
 				//根据storage还原保留的状态
@@ -428,20 +424,117 @@
 					iconChange.removeClass('active');
 				}
 
+
 				function main(){
 					//TODO 入口函数
+					var readModel = getReadModel();
+					readModel.init();
+					var uiRander = randerUI();
+					uiRander.init();
 					eventBind();
 				}
 				function getReadModel(){
 					//TODO 数据交互
-					
+					function init(){
+						getChapterInfo().then(function(res){
+							var chapters = res.chapters;
+//							baseStatus.curChapterId = chapters[0].chapter_id + 1;
+//							Util.setStorage('curChapterId',baseStatus.curChapterId); //这块重置成1了，所以出的bug
+							Util.setStorage('totalChapterCount',chapters.length);
+						})
+					}
+					function getChapterInfo(){
+						var promise = new Promise(function(resolve,reject){
+							$.ajax({
+								type:'GET',
+								url:'data/chapter.json',
+								dataType:'json',
+								success:function(data){
+									if(data.result == 0){
+										resolve(data);
+									}else{
+										reject();
+									}
+								}
+							});
+						});
+						return promise;
+					}
+					function getArticleDetail(chapter_id){
+						var promise = new Promise(function(resolve,reject){
+							$.ajax({
+								type:'GET',
+								url:'data/data' + chapter_id + '.json',
+								dataType:'json',
+								success:function(data){
+									if(data.result == 0){
+										resolve(data);
+									}else{
+										reject();
+									}
+								}
+							});
+						});
+						return promise;
+					}
+					return {
+						init:init,
+						getArticleDetail:getArticleDetail
+					};
 					
 				}
 				function randerUI(){
 					//TODO UI渲染
+					function init(){
+						getReadModel().getArticleDetail(baseStatus.curChapterId).then(function(res){
+							var articleJsonpUrl = res.jsonp;
+							return Util.getByJsonp(articleJsonpUrl);
+						}).then(function(res){
+							res = JSON.parse(res);
+							randerUI().randerText(res);
+						});
+					}
+					function randerText(data){
+						var title = data.t;
+						var con = '';
+						tempDom.textTitle.html(title);
+						tempDom.textCon.html();
+						for(var i=0; i<data.p.length; i++){
+							con += '<p>'+ data.p[i] +'</p>';
+						}
+						tempDom.textCon.html(con);
+					}
+					return {
+						init:init,
+						randerText:randerText
+					}
 				}
 				function eventBind(){
 					//TODO 事件的交互绑定
+
+					//分页 上一章和下一章
+					tempDom.prevChapter.click(function(){
+						if(baseStatus.curChapterId <= 1){
+							alert("已经没有上一章了");
+							return;
+						}
+						win.scrollTop(0);
+						baseStatus.curChapterId -= 1;
+						Util.setStorage('curChapterId',baseStatus.curChapterId);
+						randerUI().init();
+					});
+					tempDom.nextChapter.click(function(){
+						console.log(baseStatus.curChapterId);
+//						if(baseStatus.curChapterId >= baseStatus.totalChapterCount){
+						if(baseStatus.curChapterId >= 4){
+							alert("已经没有下一章了");
+							return;
+						}
+						win.scrollTop(0);
+						baseStatus.curChapterId += 1;
+						Util.setStorage('curChapterId',baseStatus.curChapterId);
+						randerUI().init();
+					});
 					
 					//点击和滚动时工具条的显示隐藏
 					tempDom.centerArea.click(function(){
@@ -473,16 +566,20 @@
 							tempDom.nightBgColor.addClass('on');
 							var tempBgc = tempDom.nightBgColor.find('.color-ball').css('background-color');
 							tempDom.body.css({backgroundColor:tempBgc});
+							Util.setStorage('curBgColor',tempBgc);
 							var tempTxtColor = tempDom.nightBgColor.find('.color-ball').attr('data-txtColor');
 							tempDom.textCon.css({color:tempTxtColor});
+							Util.setStorage('curFrontColor',tempTxtColor);
 						}else{
 							textChange.html('夜间');
 							tempDom.colorChooseGroup.find('.color-item').removeClass('on');
 							tempDom.dayBgColor.addClass('on');
 							var tempBgc = tempDom.dayBgColor.find('.color-ball').css('background-color');
 							tempDom.body.css({backgroundColor:tempBgc});
+							Util.setStorage('curBgColor',tempBgc);
 							var tempTxtColor = tempDom.dayBgColor.find('.color-ball').attr('data-txtColor');
 							tempDom.textCon.css({color:tempTxtColor});
+							Util.setStorage('curFrontColor',tempTxtColor);
 						}
 					});
 
