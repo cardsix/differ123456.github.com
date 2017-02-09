@@ -542,11 +542,15 @@
 							tempDom.toolBar.show();
 						}else{
 							tempDom.toolBar.hide();
+							tempDom.optionArea.hide();
+							tempDom.controlFont.find('.bottom-nav-icon').removeClass('active');
 						}
 					});
 
 					win.on('scroll',function(){
 						tempDom.toolBar.hide();
+						tempDom.optionArea.hide();
+						tempDom.controlFont.find('.bottom-nav-icon').removeClass('active');
 					});
 
 					tempDom.controlFont.click(function(){
@@ -620,7 +624,7 @@
 
 					//调整文字大小
 					tempDom.turnUpFontSize.click(function(){
-						if(baseStatus.baseFontSize >= 18){
+						if(baseStatus.baseFontSize >= 20){
 							return;
 						}
 						baseStatus.baseFontSize += 1;
