@@ -1,0 +1,14 @@
+﻿es6 Generator：
+http://es6.ruanyifeng.com/#docs/generator
+
+nodejs （7.5.0）doc：
+https://nodejs.org/dist/latest-v7.x/docs/api/fs.html#fs_fs_readfilesync_file_options
+
+koa doc：
+http://koa.bootcss.com/#application
+
+npm search koa-middleWare
+npm index：
+https://www.npmjs.com/
+
+exmple：https://www.npmjs.com/package/koa-route
