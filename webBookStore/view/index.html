@@ -1,1 +1,40 @@
-<%=title%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximun-scale=1.0,user-scalabel=no">
+	<meta content="telephone=no" name="format-detection" /> 
+	<title>书城主页</title>
+	<link rel="stylesheet" href="/static/css/reset.css">
+	<link rel="stylesheet" href="/static/css/index.css">
+	<script>
+		;(function(win,doc){
+			function change(){
+				doc.documentElement.style.fontSize = doc.documentElement.clientWidth * 100/ 375 + 'px';
+			}
+			change();
+			win.addEventListener('resize',change);
+		})(window,document);
+	</script>
+</head>
+<body>
+	<% include include/header.html %>
+	<div class="main">
+		<% include include/index_banner.html %>
+		<% include include/index_hot.html %>
+		<% include include/index_recommoned.html %>
+		<% include include/index_female.html %>
+		<% include include/index_male.html %>
+		<% include include/index_limit_free.html %>
+		<% include include/index_careful_choice.html %>
+	</div>
+	<script src="/static/script/vue.js"></script>
+	<script src="/static/script/zepto.js"></script>
+	<script>
+		window.jQuery = $;
+	</script>
+	<script src="/static/script/jquery.base64.js"></script>
+	<script src="/static/script/jquery.jsonp.js"></script>
+	<script src="/static/script/pages/index.js"></script>
+</body>
+</html>
