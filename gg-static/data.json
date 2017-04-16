@@ -1,0 +1,162 @@
+{
+  "vehicles": [
+    {
+      "plateNumber": "京A00000",
+      "brand": "奥迪",
+      "model": "奥迪A6",
+      "type": "小型车",
+      "color": "黑色"
+    },
+    {
+      "plateNumber": "京A00001",
+      "brand": "宝骏",
+      "model": "宝骏730",
+      "type": "大型车",
+      "color": "红色"
+    },
+    {
+      "plateNumber": "京A00002",
+      "brand": "阿斯顿·马丁",
+      "model": "阿斯顿·马丁DB9",
+      "type": "小型车",
+      "color": "白色"
+    }
+  ],
+  "services": [
+    {
+      "name": "精品内饰深清",
+      "link": "http://slapi.guaguaxiche.com/slapi/page/cms?id=55&channel=weixin",
+      "price": "349",
+      "type": "order",
+      "discount": "0"
+    },
+    {
+      "name": "精品内饰深清2",
+      "link": "http://slapi.guaguaxiche.com/slapi/page/cms?id=55&channel=weixin",
+      "price": "349",
+      "type": "order",
+      "discount": "0"
+    },
+    {
+      "name": "精品打蜡",
+      "type": "unorder",
+      "price": "119",
+      "discount": "0"
+    },
+    {
+      "name": "去虫胶柏油",
+      "type": "unorder",
+      "price": "39",
+      "discount": "0"
+    }
+  ],
+  "serviceTime": {
+    "dateTab": [
+      {
+        "date": "2017/4/14",
+        "state": "已约满",
+        "time": [
+          {"timeSlot": "08:00-11:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "12:00-15:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "16:00-19:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "09:00-12:00","state": "0","restCount": "5"},
+          {"timeSlot": "10:00-13:00","state": "0","restCount": "5"},
+          {"timeSlot": "11:00-14:00","state": "0","restCount": "5"},
+          {"timeSlot": "13:00-16:00","state": "0","restCount": "5"},
+          {"timeSlot": "14:00-1700","state": "0","restCount": "5"},
+          {"timeSlot": "15:00-18:00","state": "0","restCount": "5"}
+        ]
+      },
+      {
+        "date": "2017/4/15",
+        "state": "可预约",
+        "time": [
+          {"timeSlot": "08:00-11:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "12:00-15:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "16:00-19:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "09:00-12:00","state": "0","restCount": "5"},
+          {"timeSlot": "10:00-13:00","state": "0","restCount": "5"},
+          {"timeSlot": "11:00-14:00","state": "0","restCount": "5"},
+          {"timeSlot": "13:00-16:00","state": "0","restCount": "5"},
+          {"timeSlot": "14:00-1700","state": "0","restCount": "5"},
+          {"timeSlot": "15:00-18:00","state": "0","restCount": "5"}
+        ]
+      },
+      {
+        "date": "2017/4/16",
+        "state": "可预约",
+        "time": [
+          {"timeSlot": "08:00-11:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "12:00-15:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "16:00-19:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "09:00-12:00","state": "0","restCount": "5"},
+          {"timeSlot": "10:00-13:00","state": "0","restCount": "5"},
+          {"timeSlot": "11:00-14:00","state": "0","restCount": "5"},
+          {"timeSlot": "13:00-16:00","state": "0","restCount": "5"},
+          {"timeSlot": "14:00-1700","state": "0","restCount": "5"},
+          {"timeSlot": "15:00-18:00","state": "0","restCount": "5"}
+        ]
+      },
+      {
+        "date": "2017/4/17",
+        "state": "可预约",
+        "time": [
+          {"timeSlot": "08:00-11:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "12:00-15:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "16:00-19:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "09:00-12:00","state": "0","restCount": "5"},
+          {"timeSlot": "10:00-13:00","state": "0","restCount": "5"},
+          {"timeSlot": "11:00-14:00","state": "0","restCount": "5"},
+          {"timeSlot": "13:00-16:00","state": "0","restCount": "5"},
+          {"timeSlot": "14:00-1700","state": "0","restCount": "5"},
+          {"timeSlot": "15:00-18:00","state": "0","restCount": "5"}
+        ]
+      },
+      {
+        "date": "2017/4/18",
+        "state": "可预约",
+        "time": [
+          {"timeSlot": "08:00-11:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "12:00-15:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "16:00-19:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "09:00-12:00","state": "0","restCount": "5"},
+          {"timeSlot": "10:00-13:00","state": "0","restCount": "5"},
+          {"timeSlot": "11:00-14:00","state": "0","restCount": "5"},
+          {"timeSlot": "13:00-16:00","state": "0","restCount": "5"},
+          {"timeSlot": "14:00-1700","state": "0","restCount": "5"},
+          {"timeSlot": "15:00-18:00","state": "0","restCount": "5"}
+        ]
+      },
+      {
+        "date": "2017/4/19",
+        "state": "可预约",
+        "time": [
+          {"timeSlot": "08:00-11:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "12:00-15:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "16:00-19:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "09:00-12:00","state": "0","restCount": "5"},
+          {"timeSlot": "10:00-13:00","state": "0","restCount": "5"},
+          {"timeSlot": "11:00-14:00","state": "0","restCount": "5"},
+          {"timeSlot": "13:00-16:00","state": "0","restCount": "5"},
+          {"timeSlot": "14:00-1700","state": "0","restCount": "5"},
+          {"timeSlot": "15:00-18:00","state": "0","restCount": "5"}
+        ]
+      },
+      {
+        "date": "2017/4/20",
+        "state": "可预约",
+        "time": [
+          {"timeSlot": "08:00-11:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "12:00-15:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "16:00-19:00","state": "0","discount": "50","restCount": "5"},
+          {"timeSlot": "09:00-12:00","state": "0","restCount": "5"},
+          {"timeSlot": "10:00-13:00","state": "0","restCount": "5"},
+          {"timeSlot": "11:00-14:00","state": "0","restCount": "5"},
+          {"timeSlot": "13:00-16:00","state": "0","restCount": "5"},
+          {"timeSlot": "14:00-1700","state": "0","restCount": "5"},
+          {"timeSlot": "15:00-18:00","state": "0","restCount": "5"}
+        ]
+      }
+    ]
+  }
+}
